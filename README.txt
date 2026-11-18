@@ -1,67 +1,80 @@
-THE DAILY CHRONICLE — MEMORY GAME | TEAM 2, CHAIN A, MIDDLE
-==========================================================
+THE DAILY CHRONICLE — PSYC 402 FINAL PROJECT
+============================================
+Team: 2 | Chain: A | Position: MIDDLE
+DataPipe experiment ID: wlEDnZ5skDe5
+Next activity: https://miamac10.github.io/Final-Project-Group-3/
 
-FILES TO REPLACE IN GITHUB REPOSITORY ROOT
-------------------------------------------
-index.html — original structure, unchanged
-styles.css — original styling plus save/recovery status styling
-script.js — original stimuli/task/scoring plus chain validation and DataPipe
-README.txt — updated configuration and deployment instructions
+FILES TO REPLACE AT THE ROOT OF YOUR EXISTING GITHUB REPOSITORY
+----------------------------------------------------------------
+index.html  — existing entry point (unchanged, included for completeness)
+styles.css  — existing design plus upload-status styles
+script.js   — existing game plus chain session validation, DataPipe CSV uploads, and redirect
+README.txt  — updated instructions
 
-DEPLOYMENT
-----------
-1. Upload these four files to the root of your existing GitHub repository.
-2. Keep their names EXACTLY index.html, styles.css, script.js, README.txt.
-3. Commit the changes and wait for GitHub Pages to publish.
-4. Test with a predecessor-style link (replace YOUR_SITE_URL with your Pages URL):
-   YOUR_SITE_URL?sid=TEST123456789&chain=A
-   This is only a functional test: completing it submits real data to DataPipe.
-5. Do not publish a public standalone participant link without sid and chain.
+Keep the exact filenames above; remove the (2) suffixes from uploaded original names.
+These files are designed for a static GitHub Pages site. No server or npm build required.
 
-CONFIGURATION (script.js)
--------------------------
-TEAM_ID = '2'
-CHAIN_ID = 'A'
-DATAPIPE_EXPERIMENT_ID = 'wlEDnZ5skDe5'
-POSITION = MIDDLE
-NEXT_PROJECT_URL = https://miamac10.github.io/Final-Project-Group-3/
-API = https://pipe.jspsych.org/api/data/
+IMPORTANT: MIDDLE ACTIVITY — OPEN WITH A VALID INCOMING LINK
+-----------------------------------------------------------
+This project intentionally will NOT start when opened directly without query parameters.
+The preceding activity must send the participant here with both:
+  ?sid=ANONYMOUS_SESSION_ID&chain=A
+The app accepts a 1–128-character anonymous sid made of letters, digits, underscore or hyphen.
+It does not create a replacement sid. A missing/invalid sid or wrong chain displays a stop message.
 
-DATA / CHAIN BEHAVIOR
----------------------
-- The middle activity requires an incoming anonymous sid and chain=A in the URL.
-- Missing/invalid sid or incorrect/missing chain blocks the experiment; no new sid is generated.
-- Original four fictional stories, word challenges, headlines, 12 memory questions,
-  scoring, detailed results, and conclusion are preserved.
-- On the last memory response, the app automatically generates two CSV files:
-    summary_<sid>.csv — participant-level counts and score
-    trials_<sid>.csv  — one row per question, including classifications
-  Both include session_id, team_id, chain_id. No names, email addresses,
-  passwords, API keys, or other participant identifying fields are collected.
-- It uploads both files to DataPipe using JSON POST requests.
-  HTTP 201 and 202 count as accepted; FILE_EXISTS after a retry counts as accepted.
-- Only after BOTH uploads are accepted does it redirect with the same sid and chain:
-  https://miamac10.github.io/Final-Project-Group-3/?sid=<sid>&chain=A
-- If an upload fails, there is no redirect. The page offers Retry and both
-  CSV downloads for backup. Already-confirmed files are skipped on retry.
-- DataPipe dashboard must be configured to accept new data and have a connected
-  storage provider. This app is static and requires no application server.
+For a local test, use a query string such as:
+  index.html?sid=TEST-TEAM2-001&chain=A
+Do not use the same test ID for different participants. Do not share names or personal
+identifiers in sid. For a fresh full test use a different anonymous test ID.
 
-TESTING CHECKLIST
------------------
-[ ] Open site without params: blocked with clear instructions.
-[ ] Open ?sid=TEST123456789&chain=B: blocked.
-[ ] Open ?sid=TEST123456789&chain=A: welcome loads.
-[ ] Finish the four original stories and 12 questions.
-[ ] Saving status appears automatically; no separate Save button.
-[ ] Check DataPipe for both CSV files; verify identifiers and scoring.
-[ ] Confirm URL at next project preserves sid and chain=A.
-[ ] For failure testing, use browser DevTools network blocking for DataPipe:
-    the app must stay put and show retry and both backup downloads.
-[ ] Re-enable network and retry; then confirm successful redirect.
+PRESERVED EXPERIMENT
+--------------------
+1. Participants read four fictional articles (shuffled order).
+2. Each article is followed by a word challenge.
+3. Three shuffled accurate/misleading headlines appear one at a time.
+4. Three article-based memory questions follow each article (12 total).
+5. The existing scoring and explanation/conclusion remain on the results screen.
 
-CAUTION
+AUTOMATIC SAVING AND HANDOFF
+---------------------------
+After the twelfth response, the app immediately renders the results plus a Saving... message.
+It posts two files to https://pipe.jspsych.org/api/data/ using experimentID wlEDnZ5skDe5:
+  summary_<sid>.csv — one participant-level record
+  trials_<sid>.csv  — twelve question-level records
+Both files include session_id, team_id, chain_id; files do NOT include personal identifiers.
+Responses with HTTP 201 or 202 are accepted. On retries, HTTP 400 with FILE_EXISTS
+is accepted for a previously sent filename. A file already acknowledged is not resent.
+Only after BOTH file uploads succeed will the browser navigate to:
+  https://miamac10.github.io/Final-Project-Group-3/?sid=<same sid>&chain=A
+The participant never clicks a separate Save button.
+
+If either upload fails, the game stays on the results screen and offers Retry saving,
+Download summary CSV, and Download trial CSV. Backup downloads are not shown normally.
+Retry keeps the same filenames and CSV contents. Do not refresh the page on failure,
+because in-memory responses would be lost; use the backup CSV download buttons instead.
+
+TEST BEFORE PARTICIPANT COLLECTION
+----------------------------------
+1. Configure your DataPipe dashboard to accept data under this experiment ID.
+2. Publish the four files at your existing GitHub Pages repo root.
+3. Verify that the bare site URL refuses to start and explains the preceding activity.
+4. Verify ?sid=TEST-UNIQUE-001&chain=B is rejected.
+5. Complete a run with ?sid=TEST-UNIQUE-002&chain=A and confirm the Saving... status.
+6. Verify BOTH CSV files exist in DataPipe, contain matching identifiers, and have 1/12 rows.
+7. Verify handoff to Group 3 retains identical sid and chain=A.
+8. Test a failed upload using a blocked network request and verify retry/download options;
+   a failed upload must NOT redirect.
+9. Coordinate with the preceding activity: its link must pass sid and chain=A.
+
+PRIVACY AND RESEARCH NOTES
+--------------------------
+Fictional stories; there is no accurate-headline-only control group. Individual mistakes
+alone do not prove that headlines caused memory errors. No names, emails, passwords,
+API keys, or other personal information are requested or sent by the experiment code.
+The DataPipe experiment ID is public configuration, not an API key. DataPipe still
+receives the normal network metadata associated with web requests.
+
+EDITING
 -------
-Do not use a real participant's sid in test submissions. Avoid testing twice
-with the same sid because DataPipe prevents duplicate filenames. This activity
-is a demonstration and contains no accurate-headlines-only control group.
+Stories, headlines and quiz questions remain in the `stories` array in script.js.
+Keep correct-answer and misleading-answer indices aligned with answer choices.
