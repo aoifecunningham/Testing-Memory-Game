@@ -1,36 +1,54 @@
-THE DAILY CHRONICLE — MISINFORMATION EFFECT GAME
+THE DAILY CHRONICLE — MEMORY GAME
+=================================
 
-HOW TO RUN
-1. Keep index.html, styles.css, and script.js together in one folder.
-2. Open index.html in a modern web browser.
-3. Click Start the assignment.
+ABOUT
+-----
+An interactive psychology memory demonstration exploring how accurate and
+misleading news headlines may relate to recall of details in full articles.
+The four news stories are fictional and written for this activity.
 
-PARTICIPANT FLOW
-Welcome → four original articles (each without a headline) → three headlines per article → memory questions → combined results → CSV download.
+FILES
+-----
+index.html  - Web page structure and entry point
+styles.css  - Colors, layout, typography, and interactive styling
+script.js   - Stories, word activity, headline feed, memory quiz, results,
+              conclusion, and CSV download
+README.txt  - These instructions
 
-STORY TOPICS
-1. School phone policy
-2. Animal shelter adoption policy
-3. Honey/food labeling rules
-4. Women's soccer stadium move
+HOW TO OPEN
+-----------
+Place index.html, styles.css, and script.js in the SAME folder.
+Double-click index.html to play in a browser. No installation is required.
 
-ARTICLE TONE
-The articles now include more human stakes, disagreement, and emotional reactions while keeping the reported facts clear and neutral.
+HOW TO UPDATE GITHUB PAGES
+--------------------------
+1. Open https://github.com/aoifecunningham/Testing-Memory-Game
+2. Upload or replace index.html, styles.css, script.js, and README.txt
+   in the repository's top-level (root) folder.
+3. Commit the changes.
+4. Check https://aoifecunningham.github.io/Testing-Memory-Game/
+   after GitHub Pages has published the update.
 
-HEADLINE MIX AND RANDOMIZATION
-Across the four stories, the headline sets are deliberately mixed: some stories have one misleading headline and two accurate headlines; others have two misleading headlines and one accurate headline. At the beginning of each session, the order of the four stories is shuffled, and the three headlines within each story are shuffled. Each headline and its answer key remain paired with its original story.
-
-There are both accurate and misleading headlines across the experiment. The exact distribution of headline types is not the same for every story, which helps avoid a repetitive pattern.
-
-DELAY / DISTRACTION
-There is no separate distraction activity in this version, keeping the task brief.
-
-PROGRESS BAR
-The progress bar advances through the article, headline, and recall stages for each story and reaches 100% at the final results page.
+HOW THE GAME WORKS
+------------------
+1. Read each original fictional news story without a headline.
+2. Complete a brief unrelated word challenge.
+3. View headlines, some accurate and some misleading.
+4. Answer three memory questions based on the ORIGINAL story.
+5. Review your score, any headline-consistent mistakes, and a conclusion
+   explaining why misinformation and memory matter.
+6. Optionally download individual results as a CSV file.
 
 RESEARCH NOTE
-This is a prototype using fictional stories. For a formal study, consider random assignment to misleading-headline and control conditions, keep questions identical across conditions, counterbalance which details are altered, and compare group-level misinformation-consistent error rates. An individual result does not prove causation.
-\n\nBETWEEN-ARTICLE DISTRACTOR\nAfter the memory questions for each of the first three articles, participants complete a brief 'Which word does not match?' odd-one-out activity before reading the next article. The word choices are shuffled. The distractor is not included in the memory-results CSV.\n
+-------------
+This is a demonstration, not a controlled experiment. A participant's
+mistakes cannot by themselves prove that misleading headlines caused
+memory changes. There is no accurate-headlines-only comparison group.
+No responses are sent to a server by these files; a CSV is only saved
+locally when a participant clicks the download button.
 
-UPDATED ORDER
-For each story, participants read the original article, complete the “Which word does not match?” distractor, view the three headlines (including misleading headlines), and then answer the memory questions. The distractor is placed before the headline feed to create a brief interval between reading and exposure to later information.
+EDITING
+-------
+Edit article paragraphs, headlines, and quiz questions in the stories
+array near the top of script.js. Keep the correct-answer and misleading-
+answer indices aligned with the answer options.
