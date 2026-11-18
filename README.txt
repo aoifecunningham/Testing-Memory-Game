@@ -78,3 +78,24 @@ EDITING
 -------
 Stories, headlines and quiz questions remain in the `stories` array in script.js.
 Keep correct-answer and misleading-answer indices aligned with answer choices.
+
+DATA PIPE VERIFICATION — IMPORTANT
+---------------------------------
+These files have been checked against the documented DataPipe POST /api/data/ format,
+and automated local tests cover 201/202, partial failure, retry, and same-sid redirect.
+A successful automated local test does NOT verify live delivery to your experiment.
+You must open https://pipe.jspsych.org/ and confirm that experiment wlEDnZ5skDe5
+is accepting new data and has a connected, working storage destination.
+
+Use a fresh unique sid in your test URL, e.g.:
+https://aoifecunningham.github.io/Testing-Memory-Game/?sid=TEST-TEAM2-UNIQUE-20261118&chain=A
+Finish all 12 questions, observe the saving status, and check for BOTH files:
+summary_TEST-TEAM2-UNIQUE-20261118.csv
+trials_TEST-TEAM2-UNIQUE-20261118.csv
+If DataPipe returns 202, the files have been accepted into its retry queue; the
+actual storage provider may not show them immediately. Check DataPipe's queued files
+panel if they are not yet present in storage.
+
+A bare GitHub Pages URL must be rejected for a MIDDLE-chain activity. The preceding
+activity must link here with the same sid and chain=A. Do not remove that protection
+for real participants.
